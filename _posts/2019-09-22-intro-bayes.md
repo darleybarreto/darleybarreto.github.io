@@ -51,7 +51,7 @@ p(\theta \vert \mathcal{D}) = \frac{p(\mathcal{D} \vert \theta) \times p(\theta)
 $$
 {: .text-center}
 
-where $$ \theta = [\mu, \sigma] $$ is our set of parameters, which gives a hint on how we learn the parameters of our model. The likelihood in Equation \eqref{eq:posteior-theta} expresses how probable the observed data set is for different settings of the parameter vector $$ \theta $$, whose integral with respect to $$ \theta $$ does not (necessarily) equal one, which means that it is not a probability distribution over $$ \theta $$.  
+where $$ \theta = [\mu, \sigma] $$ is our set of parameters, which gives a hint on how we learn the parameters of our model. The likelihood $$ p(\mathcal{D} \vert \theta) $$ in Equation \eqref{eq:posteior-theta} expresses how probable the observed data set is for different settings of the parameter vector $$ \theta $$, whose integral with respect to $$ \theta $$ does not (necessarily) equal one, which means that $$ p(\mathcal{D} \vert \theta) $$  is not a probability distribution over $$ \theta $$.  
 {: .text-justify}
 
 Parametric models scale more efficiently (than non-parametric ones) with large datasets but are limited in the family of distributions they can represent, in the case of having a closed-form. That is, we assume that our model models a certain distribution, e.g., Gaussian, Categorical, Bernoulli, etc. Learning the parameters of a generative model means choosing such parameters within a family of distributions that minimizes some notion of distance between the model distribution and the data distribution.
@@ -86,7 +86,7 @@ For instance, suppose we have a dataset of values in the range $$ [10, 30] \in \
 {::options parse_block_html="true" /} 
 
 In general, the probability of our model fit our data properly is $$ p_{\mathbf{\theta}}(\mathbf{x}) $$, where $$ \mathbf{\theta} $$ represents the model parameters and $$ \mathbf{x} $$ represents our data. A popular estimate for $$ \mathbf{\theta} $$ is the Maximum Likelihood Estimate (MLE), where it tries to find $$ \mathbf{\theta} $$ that maximized the likelihood function 
-$$ p(\mathcal{D} \vert \theta) $$. In both the Bayesian and [frequentist](https://en.wikipedia.org/wiki/Frequentist_probability) paradigms, the likelihood function plays a central role. In a frequentist setting, $$ \mathbf{\theta} $$ is considered to be a fixed parameter, whose value is determined by some form of estimator, that is, this setting provides a point estimate (a single value) of the parameter (or sometimes a confidence interval). In the other hand, Bayesian setting provides a proper probability distribution for the parameter via the posterior distribution over $$ \mathbf{\theta} $$. MLE corresponds to choosing the **value** of $$ \mathbf{\theta} $$ for which the probability of the observed data set is maximized:  
+$$ p(\mathbf{x} \vert \theta) $$. In both the Bayesian and [frequentist](https://en.wikipedia.org/wiki/Frequentist_probability) paradigms, the likelihood function plays a central role. In a frequentist setting, $$ \mathbf{\theta} $$ is considered to be a fixed parameter, whose value is determined by some form of estimator, that is, this setting provides a point estimate (a single value) of the parameter (or sometimes a confidence interval). In the other hand, Bayesian setting provides a proper probability distribution for the parameter via the posterior distribution over $$ \mathbf{\theta} $$. MLE corresponds to choosing the **value** of $$ \mathbf{\theta} $$ for which the probability of the observed data set is maximized:  
 {: .text-justify}
 
 $$
@@ -105,9 +105,9 @@ $$
 
 <div style="display: inline-block;text-align:center;">
   <img src='/img/posts/bayes/bayes_0/latent.svg' width="300" />
-  <p style="text-align:center;margin-top:0;"><b>Figure 3</b> Graphical representation of an LVM. Where \(z\) is a white node representing a hidden variable and \(x\) the observable variable (grey).
-  Continuous arrow means direct dependency, thus \(x\) depends on \(z\). Dashed arrow means we can observe \(z\) undrectly, that is, 
-  once we know \(x\) we can infer \(z\) somehow.
+  <p style="text-align:center;margin-top:0;"><b>Figure 3</b> Graphical representation of an LVM. Where  $$ z $$ is a white node representing a hidden variable and $$ x $$ the observable variable (grey).
+  Continuous arrow means direct dependency, thus $$ x $$ depends on $$ z $$. Dashed arrow means we can observe $$ z $$ undrectly, that is, 
+  once we know $$ x $$ we might be able to infer $$ z $$ somehow.
   </p>
 </div>
 
