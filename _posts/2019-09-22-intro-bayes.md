@@ -20,22 +20,19 @@ Here is the outline of the blog posts of this series:
 The outline will be updated in time as I post my drafts.
 
 # Brief introduction
-Let’s suppose our data, $$ \mathcal{D} $$, is a set of samples from a distribution ($$ p_{\mathcal{D}} $$). We want to use the data we already have to acquire some beliefs in order to apply when new data comes. Giving a task, e.g., classification and regression, we summarize these beliefs on a model. There are two main classifications of a model, either **generative** or **discriminative**. The first is used in statistical classification, it models a *decision boundary*, a conditional probability, between classes; the latter explicitly models the joint distribution of $$ \mathcal{D} $$ and our target set of variables, i.e., a generative model can be used to learn latent variables, classes, values of a regressor and much more. In other words, a discriminative tries to model $$ p(y \vert x)$$, and a generative $$ p(x,y)$$.  
-{: .text-justify}
-
-Thus a typical "query" we would do to a discriminative would be "Once you learned to classify animals, what is the animal in a given picture?", in the other hand, a generative could answer that and more questions like "Now you know what animals are, give me a picture with an animal $$ y $$", "Give me a lower-dimensional representation of this image" and so on. It doesn't mean that a discriminative couldn't answer the two previous questions, the main difference is that a generative model tries to learn a joint probability, the discriminative usually learns a mapping, which in most cases has worse performance than a generative for the same task. In this and following posts, we will be focusing on generative models.  
-{: .text-justify}
-
-Recall the general definition of the Bayes' theorem  
+First thing I would say in an introductory post on bayesian approximate inference is to recall the general definition of the Bayes' theorem  
 {: .text-justify}
 $$
 \begin{equation}
-p(A \vert B) = \frac{p(B \vert A) \times p(A)}{p(B)} \quad \equiv \quad \text{posterior} = \frac{\text{likelihood} \times \text{prior}}{\text{evidence}}\tag{1}\label{eq:bayes-theo}
+p(A \vert B) = \frac{p(B \vert A) \times p(A)}{p(B)} \tag{1}\label{eq:bayes-theo}
 \end{equation}
 $$
 {: .text-center}
 
-The names in the equation on the right are the "usual" bayesian setup, either doing inference or learning, as we shall see. 
+Let’s suppose our data, $$ \mathcal{D} $$, is a set of samples from a distribution ($$ p_{\mathcal{D}} $$). We want to use the data we already have to acquire some beliefs in order to apply when new data comes. Giving a task, e.g., classification and regression, we summarize these beliefs on a model. There are two main classifications of a model, either **generative** or **discriminative**. The first is used in statistical classification, it models a *decision boundary*, a conditional probability, between classes; the latter explicitly models the joint distribution of $$ \mathcal{D} $$ and our target set of variables, i.e., a generative model can be used to learn latent variables, classes, values of a regressor and much more. In other words, a discriminative tries to model $$ p(y \vert x)$$, and a generative $$ p(x,y)$$.  
+{: .text-justify}
+
+Thus a typical "query" we would do to a discriminative would be "Once you learned to classify animals, what is the animal in a given picture?", in the other hand, a generative could answer that and more questions like "Now you know what animals are, give me a picture with an animal $$ y $$", "Give me a lower-dimensional representation of this image" and so on. It doesn't mean that a discriminative couldn't answer the two previous questions, the main difference is that a generative model tries to learn a joint probability, the discriminative usually learns a mapping, which in most cases has worse performance than a generative for the same task. In this and following posts, we will be focusing on generative models.  
 {: .text-justify}
 
 A generative model tries to approximate the data distribution, $$ p_{\mathcal{D}} $$, given access to the dataset. We hope that if we are able to **learn** a good generative model, we can use the learned model for **inference**. In most models we are interested in summarizing all the information about the dataset $$ \mathcal{D} $$ in a finite set of parameters, thus we call them **parametric** models. So the task of learning is "discovering" the parameters of a model that would maximize the probability of $$ \mathcal{D} $$, and inference would be using the trained model to *infer* something, e.g, class value, lower-dimensional representation, continuous value for a regression problem, etc.  
@@ -46,7 +43,7 @@ In a probabilistic view, our model is defined by its parameters and a distributi
 
 $$
 \begin{equation}
-p(\theta \vert \mathcal{D}) = \frac{p(\mathcal{D} \vert \theta) \times p(\theta)}{p(\mathcal{D})}\tag{2}\label{eq:posteior-theta}
+p(\theta \vert \mathcal{D}) = \frac{p(\mathcal{D} \vert \theta) \times p(\theta)}{p(\mathcal{D})} \quad \equiv \quad \text{posterior} = \frac{\text{likelihood} \times \text{prior}}{\text{evidence}}\tag{2}\label{eq:posteior-theta}
 \end{equation}
 $$
 {: .text-center}
