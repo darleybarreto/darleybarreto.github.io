@@ -2,7 +2,7 @@
 layout: post
 title: Introduction to Bayesian Approximate Inference
 subtitle: Where it all begins
-tags: [bayes-series]
+tags: [bayes-series, vi]
 ---
 
 # Before diving into the goodies
@@ -15,7 +15,7 @@ In this and future posts, I will be referencing at the bottom of the page what s
 
 Here is the outline of the blog posts of this series:
 1. Introduction (you are here).
-<!-- 2. Variational Inference - VI (I) : Intro & Mean-Field Factorization. -->
+2. [Variational Inference (1) - Intro & Mean-Field Approximation](/2019-09-24-vi-mean-field).
 
 The outline will be updated in time as I post my drafts.
 
@@ -108,7 +108,7 @@ $$
   </p>
 </div>
 
-We may assume that the observed variables $$ \mathbf{x} $$ are correlated because they arise from a hidden common “cause”. A model with *hidden variables* are also known as **latent variable models** (LVMs), denoted as $$ \mathbf{z} $$, see **Figure 3**. In this setting, our generative model is the joint of our data and hidden variables. So, defining a joint distribution over observed and latent variables, $$ p_{\mathbf{\theta}}(\mathbf{x},\mathbf{z}) $$, the corresponding distribution of the observed variables alone is obtained by marginalization, $$ \int_{z} p_{\mathbf{\theta}}(\mathbf{x},z) dz $$. The introduction of latent variables thereby allows complicated distributions to be formed from simpler components[^BishopBook], because $$ p_{\mathbf{\theta}}(\mathbf{x},\mathbf{z}) = p_{\mathbf{\theta}}(\mathbf{x} \vert \mathbf{z}) p(\mathbf{z})$$, where the conditional can be a tractable distribution and the prior an arbitrary complex and intractable with no analytical form, then the joint is a complex distribution. Some applications of LVMs relies on discovering the hidden space and then computing a lower-dimensional representation of our data. For instance, suppose we have a dataset of images, where each has $$ N \times M $$ pixels, then our data lies on $$ \mathbb{R}^{N \times M} $$, which usually is an incredibly high dimensional space. We could use  a generative LVM in order to allow us to discover the latent variable associated with each image and recover a $$ L \times K $$ representation of them, where $$ L \ll N$$ and $$ K \ll M$$ (usually $$ L = 1$$).  
+We may assume that the observed variables $$ \mathbf{x} $$ are correlated because they arise from a hidden common "cause". Models with *hidden variables* are also known as **latent variable models** (LVMs), denoted as $$ \mathbf{z} $$, see **Figure 3**. In this setting, our generative model is the joint of our data and hidden variables. So, defining a joint distribution over observed and latent variables, $$ p_{\mathbf{\theta}}(\mathbf{x},\mathbf{z}) $$, the corresponding distribution of the observed variables alone is obtained by marginalization, $$ \int_{z} p_{\mathbf{\theta}}(\mathbf{x},z) dz $$. The introduction of latent variables thereby allows complicated distributions to be formed from simpler components[^BishopBook], because $$ p_{\mathbf{\theta}}(\mathbf{x},\mathbf{z}) = p_{\mathbf{\theta}}(\mathbf{x} \vert \mathbf{z}) p(\mathbf{z})$$, where the conditional can be a tractable distribution and the prior an arbitrary complex and intractable with no analytical form, then the joint is a complex distribution. Some applications of LVMs relies on discovering the hidden space and then computing a lower-dimensional representation of our data. For instance, suppose we have a dataset of images, where each has $$ N \times M $$ pixels, then our data lies on $$ \mathbb{R}^{N \times M} $$, which usually is an incredibly high dimensional space. We could use  a generative LVM in order to allow us to discover the latent variable associated with each image and recover a $$ L \times K $$ representation of them, where $$ L \ll N$$ and $$ K \ll M$$ (usually $$ L = 1$$).  
 {: .text-justify}
 
 Besides, some LVMs assumptions often have fewer parameters than models that directly represent correlation in the visible space; and the hidden variables in an LVM can serve as a **bottleneck**, which computes a compressed representation of the data, once we compute a lower-dimensional representation of the data and can use it to other tasks. This forms the basis of unsupervised learning. The latent variables do not need to (or might not) have any meaning, we might simply introduce latent variables in order to make the model more powerful[^MurphyBook], of course, it depends on the modeling and what is our tasks, stacking layers of latent variables doesn't necessarily implies a higher performance or generalization.
@@ -139,7 +139,7 @@ $$. Imagine that our data is a set of images in which we want to perform classif
 In such situations, we need to resort to approximation schemes, and these falls broadly into two classes, according to whether they rely on **stochastic** (sampling methods) or **deterministic** approximations. Stochastic techniques such as Markov Chain Monte Carlo (**MCMC**), which approximates inference via sampling, have enabled the widespread use of Bayesian methods across many domains. They generally have the property that given infinite computational resources, they can generate exact results, and the approximation arises from the use of a finite amount of processor time. In practice, sampling methods can be computationally demanding, often limiting their use to small-scale problems. Also, it can be difficult to know whether a sampling scheme is generating independent samples from the required distribution. 
 {: .text-justify}
 
-Deterministic approximation schemes are based on analytical approximations to the posterior distribution, for example by assuming that it factorizes in a particular way or that it has a specific parametric form such as a Gaussian. As such, they can never generate exact results, and so their strengths and weaknesses are complementary to those of sampling methods. We can cite **Laplace** approximation, which is based on a local Gaussian approximation to a mode (i.e., a maximum) of the distribution, and **variational inference** (VI) or variational Bayes (when inferring also the model's parameters). In the next post, I will be introducing VI concepts and the Mean Field Factorization method.
+Deterministic approximation schemes are based on analytical approximations to the posterior distribution, for example by assuming that it factorizes in a particular way or that it has a specific parametric form such as a Gaussian. As such, they can never generate exact results, and so their strengths and weaknesses are complementary to those of sampling methods. We can cite **Laplace** approximation, which is based on a local Gaussian approximation to a mode (i.e., a maximum) of the distribution, and **variational inference** (VI) or variational Bayes (when inferring also the model's parameters). In the next post, I will be introducing VI concepts and the Mean Field Approximation.
 {: .text-justify}
 
 
