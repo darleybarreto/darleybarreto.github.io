@@ -15,7 +15,7 @@ In this and future posts, I will be referencing at the bottom of the page what s
 
 Here is the outline of the blog posts of this series:
 1. Introduction (you are here).
-2. [Variational Inference (1) - Intro & Mean-Field Approximation](/2019-09-24-vi-mean-field).
+2. [Variational Inference (1) - Intro & Mean-Field Approximation](/2019-11-11-vi-mean-field).
 
 The outline will be updated in time as I post my drafts.
 
